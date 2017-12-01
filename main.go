@@ -16,7 +16,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"runtime/debug"
+	//"runtime/debug"
 	"strconv"
 	"sync"
 	"time"
@@ -31,7 +31,7 @@ func main() {
 		fmt.Println(time.Since(t))
 	}(time.Now())
 
-	debug.SetGCPercent(300)
+	//debug.SetGCPercent(300)
 
 	flag.Parse()
 	if flag.NArg() > 0 {
@@ -91,7 +91,7 @@ func bottomUpTree(depth int) *Node {
 		currentLayerNum := 1 << uint(i)
 		currentLayerFirst := currentLayerNum - 1
 		nodes[currentLayerFirst] = (*Node)(unsafe.Pointer(ptr))
-		ptr += 16
+		ptr += nodeSize
 		if currentLayerNum <= 1 {
 			continue
 		}
@@ -99,7 +99,7 @@ func bottomUpTree(depth int) *Node {
 		nodes[upperLayerFirst].left = nodes[currentLayerFirst]
 		for m := currentLayerFirst + 1; m <= 2*currentLayerNum-2; m++ {
 			nodes[m] = (*Node)(unsafe.Pointer(ptr))
-			ptr += 16
+			ptr += nodeSize
 			diff := m - currentLayerFirst
 			mod := diff % 2
 			offset := diff / 2
