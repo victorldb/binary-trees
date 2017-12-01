@@ -16,7 +16,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	//"runtime/debug"
+	"runtime/debug"
 	"strconv"
 	"sync"
 	"time"
@@ -31,7 +31,7 @@ func main() {
 		fmt.Println(time.Since(t))
 	}(time.Now())
 
-	//debug.SetGCPercent(300)
+	debug.SetGCPercent(300)
 
 	flag.Parse()
 	if flag.NArg() > 0 {
