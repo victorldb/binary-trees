@@ -1,5 +1,6 @@
 # binary-trees
 go binary-trees
+
 regret: it was rejected by benchmarksgame
 
 ## report
